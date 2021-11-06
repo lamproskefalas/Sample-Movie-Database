@@ -15,13 +15,36 @@
 	<description>Sample Movie Database in Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<disruptor-maven-plugin.version>3.4.4</disruptor-maven-plugin.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!--
+				Asynchronous Logging @see https://logging.apache.org/log4j/2.x/manual/async.html
+				Hint:
+				Don't forget to set system property
+				-Dlog4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+				 to make all loggers asynchronous
+				-->
+			<dependency>
+				<groupId>com.lmax</groupId>
+				<artifactId>disruptor</artifactId>
+				<version>${disruptor-maven-plugin.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -36,6 +59,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.lmax</groupId>
+			<artifactId>disruptor</artifactId>
 		</dependency>
 	</dependencies>
 
