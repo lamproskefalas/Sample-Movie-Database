@@ -121,6 +121,26 @@
 							"response": []
 						},
 						{
+							"name": "ActorsSimple by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actors/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actors",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "DirectorsSimple",
 							"request": {
 								"method": "GET",
@@ -141,6 +161,26 @@
 							"response": []
 						},
 						{
+							"name": "DirectorsSimple by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/directors/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"directors",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "ShowsSimple",
 							"request": {
 								"method": "GET",
@@ -155,6 +195,26 @@
 									"path": [
 										"shows",
 										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ShowsSimple by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shows/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shows",
+										"1"
 									]
 								}
 							},
@@ -187,6 +247,28 @@
 							"response": []
 						},
 						{
+							"name": "Actor by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/actors/1/fullDetails/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"actors",
+										"1",
+										"fullDetails",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Directors",
 							"request": {
 								"method": "GET",
@@ -208,6 +290,28 @@
 							"response": []
 						},
 						{
+							"name": "Director by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/directors/1/fullDetails/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"directors",
+										"1",
+										"fullDetails",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Shows",
 							"request": {
 								"method": "GET",
@@ -221,6 +325,28 @@
 									"port": "8080",
 									"path": [
 										"shows",
+										"fullDetails",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Shows by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/shows/1/fullDetails/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"shows",
+										"1",
 										"fullDetails",
 										""
 									]

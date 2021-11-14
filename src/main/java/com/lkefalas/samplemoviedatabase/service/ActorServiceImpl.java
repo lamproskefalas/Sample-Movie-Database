@@ -25,6 +25,11 @@ public class ActorServiceImpl extends AbstractService<Actor> implements ActorSer
     }
 
     @Override
+    public Actor findWithDetails(Long id) {
+        return repository.findWithDetails(id);
+    }
+
+    @Override
     public JpaRepository<Actor, Long> getRepository() {
         return repository;
     }

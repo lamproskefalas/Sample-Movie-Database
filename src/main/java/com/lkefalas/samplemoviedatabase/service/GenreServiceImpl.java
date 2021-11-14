@@ -1,5 +1,6 @@
 package com.lkefalas.samplemoviedatabase.service;
 
+import com.lkefalas.samplemoviedatabase.domain.Actor;
 import com.lkefalas.samplemoviedatabase.domain.Genre;
 import com.lkefalas.samplemoviedatabase.exception.NotFoundException;
 import com.lkefalas.samplemoviedatabase.repository.GenreRepository;
@@ -27,5 +28,10 @@ public class GenreServiceImpl extends AbstractService<Genre> implements GenreSer
     @Override
     public List<Genre> findAllWithDetails() {
         return null;
+    }
+
+    @Override
+    public Genre findWithDetails(Long id) {
+        return repository.findWithDetails(id);
     }
 }

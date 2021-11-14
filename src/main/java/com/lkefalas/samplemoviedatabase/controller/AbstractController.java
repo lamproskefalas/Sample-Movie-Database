@@ -30,20 +30,42 @@ public abstract class AbstractController
 
     @GetMapping("/")
     public ResponseEntity<ApiResponse<List<S>>> findAll() {
-        List<T> details = getBaseService().findAll();
+        List<T> entities = getBaseService().findAll();
 
-        List<S> simpleDTO = details.stream().map(this::convertToSimpleDto).collect(Collectors.toList());
+        List<S> simpleDTO =
+                (entities!=null)
+                        ?entities.stream().map(this::convertToSimpleDto).collect(Collectors.toList())
+                        :null;
 
         return ResponseEntity.ok(ApiResponse.<List<S>>builder().data(simpleDTO).build());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<S>> find(@PathVariable("id") final Long id) {
+        T entity = getBaseService().find(id);
+
+        S simpleDTO = (entity!=null) ? convertToSimpleDto(entity) : null;
+
+        return ResponseEntity.ok(ApiResponse.<S>builder().data(simpleDTO).build());
+    }
+
     @GetMapping("/fullDetails")
     public ResponseEntity<ApiResponse<List<D>>> findAllWithDetails(){
-        List<T> details = getBaseService().findAllWithDetails();
+        List<T> entities = getBaseService().findAllWithDetails();
 
-        List<D> detailedDTO = details.stream().map(this::convertToDetailedDto).collect(Collectors.toList());
+        List<D> detailedDTO =
+                (entities!=null)
+                ?entities.stream().map(this::convertToDetailedDto).collect(Collectors.toList())
+                :null;
 
         return ResponseEntity.ok(ApiResponse.<List<D>>builder().data(detailedDTO).build());
+    }
+
+    @GetMapping("/{id}/fullDetails")
+    public ResponseEntity<ApiResponse<D>> findWithDetails(@PathVariable("id") final Long id) {
+        T entity = getBaseService().findWithDetails(id);
+        D detailedDTO = (entity!=null) ? convertToDetailedDto(entity) : null;
+        return ResponseEntity.ok(ApiResponse.<D>builder().data(detailedDTO).build());
     }
 
     @PostMapping("")

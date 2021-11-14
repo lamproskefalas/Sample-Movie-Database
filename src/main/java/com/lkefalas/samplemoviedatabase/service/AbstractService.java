@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public abstract class AbstractService<T extends BaseModel> extends AbstractLogComponent implements BaseService<T, Long> {
     public abstract JpaRepository<T, Long> getRepository();

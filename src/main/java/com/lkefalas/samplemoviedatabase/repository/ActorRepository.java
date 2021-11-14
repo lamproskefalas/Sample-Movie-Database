@@ -11,4 +11,7 @@ public interface ActorRepository  extends JpaRepository<Actor, Long> {
 
     @Query("select distinct a from Actor a left join fetch a.roles r left join fetch r.show")
     List<Actor> findAllWithDetails();
+
+    @Query("select distinct a from Actor a left join fetch a.roles r left join fetch r.show where a.id = ?1")
+    Actor findWithDetails(Long id);
 }

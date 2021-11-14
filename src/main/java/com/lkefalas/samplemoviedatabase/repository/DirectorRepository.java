@@ -11,4 +11,7 @@ public interface DirectorRepository extends JpaRepository<Director, Long> {
 
     @Query("select distinct d from Director d left join fetch d.shows s left join fetch s.roles r left join fetch r.actor left join fetch s.genres")
     List<Director> findAllWithDetails();
+
+    @Query("select distinct d from Director d left join fetch d.shows s left join fetch s.roles r left join fetch r.actor left join fetch s.genres where d.id = ?1")
+    Director findWithDetails(Long id);
 }

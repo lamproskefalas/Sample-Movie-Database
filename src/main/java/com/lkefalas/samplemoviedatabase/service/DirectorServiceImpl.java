@@ -1,5 +1,6 @@
 package com.lkefalas.samplemoviedatabase.service;
 
+import com.lkefalas.samplemoviedatabase.domain.Actor;
 import com.lkefalas.samplemoviedatabase.domain.Director;
 import com.lkefalas.samplemoviedatabase.exception.NotFoundException;
 import com.lkefalas.samplemoviedatabase.repository.DirectorRepository;
@@ -27,5 +28,10 @@ public class DirectorServiceImpl extends AbstractService<Director> implements Di
     @Override
     public List<Director> findAllWithDetails() {
         return repository.findAllWithDetails();
+    }
+
+    @Override
+    public Director findWithDetails(Long id) {
+        return repository.findWithDetails(id);
     }
 }

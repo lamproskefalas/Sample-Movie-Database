@@ -1,5 +1,6 @@
 package com.lkefalas.samplemoviedatabase.service;
 
+import com.lkefalas.samplemoviedatabase.domain.Actor;
 import com.lkefalas.samplemoviedatabase.domain.Role;
 import com.lkefalas.samplemoviedatabase.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,10 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
     @Override
     public List<Role> findAllWithDetails() {
         return null;
+    }
+
+    @Override
+    public Role findWithDetails(Long id) {
+        return repository.findWithDetails(id);
     }
 }

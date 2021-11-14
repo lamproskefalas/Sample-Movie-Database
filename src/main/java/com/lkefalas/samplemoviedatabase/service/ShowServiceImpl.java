@@ -1,5 +1,6 @@
 package com.lkefalas.samplemoviedatabase.service;
 
+import com.lkefalas.samplemoviedatabase.domain.Actor;
 import com.lkefalas.samplemoviedatabase.domain.Show;
 import com.lkefalas.samplemoviedatabase.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,10 @@ public class ShowServiceImpl extends AbstractService<Show> implements ShowServic
     @Override
     public List<Show> findAllWithDetails() {
         return repository.findAllWithDetails();
+    }
+
+    @Override
+    public Show findWithDetails(Long id) {
+        return repository.findWithDetails(id);
     }
 }

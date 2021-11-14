@@ -22,4 +22,6 @@ public interface BaseService<T, ID> {
     List<T> findAll();
 
     List<T> findAllWithDetails();
+
+    T findWithDetails(ID id);
 }
