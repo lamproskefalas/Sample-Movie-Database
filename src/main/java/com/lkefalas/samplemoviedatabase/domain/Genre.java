@@ -1,5 +1,6 @@
 package com.lkefalas.samplemoviedatabase.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -27,5 +28,6 @@ public class Genre extends BaseModel {
             joinColumns=@JoinColumn(name="genre_id"),
             inverseJoinColumns=@JoinColumn(name="show_id")
     )
+    @JsonIgnore
     private Set<Show> shows = new HashSet<>();
 }

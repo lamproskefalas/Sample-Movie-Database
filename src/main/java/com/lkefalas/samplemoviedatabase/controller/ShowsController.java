@@ -1,21 +1,20 @@
 package com.lkefalas.samplemoviedatabase.controller;
 
-import com.lkefalas.samplemoviedatabase.api.actors.ActorsPersistDTO;
 import com.lkefalas.samplemoviedatabase.api.shows.ShowFullDetailsDTO;
 import com.lkefalas.samplemoviedatabase.api.shows.ShowPersistDTO;
 import com.lkefalas.samplemoviedatabase.api.shows.ShowSimpleDTO;
-import com.lkefalas.samplemoviedatabase.domain.Actor;
+import com.lkefalas.samplemoviedatabase.domain.Genre;
 import com.lkefalas.samplemoviedatabase.domain.Show;
+import com.lkefalas.samplemoviedatabase.service.DirectorService;
+import com.lkefalas.samplemoviedatabase.service.GenreService;
 import com.lkefalas.samplemoviedatabase.service.ShowService;
-import com.lkefalas.samplemoviedatabase.transfer.ApiResponse;
 import lombok.Getter;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @RestController()
 @RequestMapping("/shows")
@@ -23,11 +22,15 @@ import java.util.List;
 public class ShowsController extends AbstractController
         <Show, ShowSimpleDTO, ShowFullDetailsDTO, ShowPersistDTO> {
     private final ShowService baseService;
+    private final DirectorService directorService;
+    private final GenreService genreService;
     private final ModelMapper modelMapper;
 
-    public ShowsController(ShowService baseService, ModelMapper modelMapper) {
+    public ShowsController(ShowService baseService, DirectorService directorService, GenreService genreService, ModelMapper modelMapper) {
         super(modelMapper);
         this.baseService = baseService;
+        this.directorService = directorService;
+        this.genreService = genreService;
         this.modelMapper = modelMapper;
     }
 
@@ -46,6 +49,25 @@ public class ShowsController extends AbstractController
         if(mode.equals("create")){
             showPersistDTO.setId(null);
         }
-        return modelMapper.map(showPersistDTO, Show.class);
+
+        Show show = modelMapper.map(showPersistDTO, Show.class);
+
+        if(showPersistDTO.getDirectorId() != null) {
+            show.setDirector(directorService.find(showPersistDTO.getDirectorId()));
+        }
+
+        if(showPersistDTO.getMovieGenres() != null) {
+            Set<Genre> movieGenres = new HashSet<>();
+            for (Long genreId: showPersistDTO.getMovieGenres()) {
+                Genre genre = genreService.find(genreId);
+                if(genre != null) {
+                    movieGenres.add(genre);
+                }
+            }
+            show.setDirector(directorService.find(showPersistDTO.getDirectorId()));
+            show.setGenres(movieGenres);
+        }
+
+        return show;
     }
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * This class represents a cast member of a movie
+ * This class represents a cast member of a movie/tv show
  */
 @Getter
 @Setter

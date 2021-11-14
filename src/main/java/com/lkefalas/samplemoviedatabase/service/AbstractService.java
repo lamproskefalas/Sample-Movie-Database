@@ -69,7 +69,7 @@ public abstract class AbstractService<T extends BaseModel> extends AbstractLogCo
 
     @Override
     public T find(Long id) {
-        logger.trace("Retrieving entity with id." + id.toString());
+        logger.trace("Retrieving entity with id {}.", id.toString());
         return getRepository().findById(id).orElse(null);
     }
 }

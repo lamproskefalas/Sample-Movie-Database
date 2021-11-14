@@ -1,6 +1,9 @@
 package com.lkefalas.samplemoviedatabase.domain;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -27,5 +30,6 @@ public class Director extends BaseModel {
     private String lastName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "director")
+    @JsonIgnore
     private Set<Show> shows = new HashSet<>();
 }

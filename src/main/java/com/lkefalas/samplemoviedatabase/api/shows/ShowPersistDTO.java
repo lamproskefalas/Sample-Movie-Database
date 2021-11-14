@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,4 +19,8 @@ public class ShowPersistDTO extends BasePersistDTO {
     private BigDecimal rating;
 
     private ShowTypeDTO showType;
+
+    private Long directorId;
+
+    private List<Long> movieGenres;
 }

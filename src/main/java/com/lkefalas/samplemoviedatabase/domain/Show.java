@@ -12,7 +12,7 @@ import java.util.Set;
 
 
 /**
- * This class represents a movie
+ * This class represents a show (movie/tv series)
  */
 @Getter
 @Setter
