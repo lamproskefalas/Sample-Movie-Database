@@ -1,0 +1,23 @@
+spring:
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  datasource:
+    hikari:
+      username: sa
+      password: sa
+    url: jdbc:h2:file:~/smdb_sgdigital;IFEXISTS=FALSE;AUTO_SERVER=TRUE;
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false

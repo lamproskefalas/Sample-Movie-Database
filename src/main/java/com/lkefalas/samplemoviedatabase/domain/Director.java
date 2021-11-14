@@ -1,23 +1,31 @@
 package com.lkefalas.samplemoviedatabase.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * This class represents a director
  */
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "DIRECTORS")
 public class Director extends BaseModel {
+    @NotNull(message = "First name of the Director cannot be null")
+    @Column(length = 50)
     private String firstName;
+
+    @NotNull(message = "Last name of the Director cannot be null")
+    @Column(length = 50)
     private String lastName;
-    private Set<Movie> movies = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "director")
+    private Set<Show> shows = new HashSet<>();
 }

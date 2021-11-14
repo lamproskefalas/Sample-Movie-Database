@@ -1,13 +1,23 @@
 package com.lkefalas.samplemoviedatabase.domain;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Data
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
+
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
-public class BaseModel {
+@MappedSuperclass
+public abstract class BaseModel implements Serializable {
     private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 }
