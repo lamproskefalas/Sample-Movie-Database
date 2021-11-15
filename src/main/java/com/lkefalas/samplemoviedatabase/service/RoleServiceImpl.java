@@ -1,13 +1,10 @@
 package com.lkefalas.samplemoviedatabase.service;
 
-import com.lkefalas.samplemoviedatabase.domain.Actor;
 import com.lkefalas.samplemoviedatabase.domain.Role;
+import com.lkefalas.samplemoviedatabase.repository.BaseRepository;
 import com.lkefalas.samplemoviedatabase.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,17 +12,7 @@ public class RoleServiceImpl extends AbstractService<Role> implements RoleServic
     private final RoleRepository repository;
 
     @Override
-    public JpaRepository<Role, Long> getRepository() {
+    public BaseRepository<Role, Long> getRepository() {
         return repository;
-    }
-
-    @Override
-    public List<Role> findAllWithDetails() {
-        return null;
-    }
-
-    @Override
-    public Role findWithDetails(Long id) {
-        return repository.findWithDetails(id);
     }
 }

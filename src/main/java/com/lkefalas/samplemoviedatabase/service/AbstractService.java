@@ -2,7 +2,7 @@ package com.lkefalas.samplemoviedatabase.service;
 
 import com.lkefalas.samplemoviedatabase.base.AbstractLogComponent;
 import com.lkefalas.samplemoviedatabase.domain.BaseModel;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.lkefalas.samplemoviedatabase.repository.BaseRepository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractService<T extends BaseModel> extends AbstractLogComponent implements BaseService<T, Long> {
-    public abstract JpaRepository<T, Long> getRepository();
+    public abstract BaseRepository<T, Long> getRepository();
 
     @Override
     public List<T> createAll(final T... entities) {
@@ -70,5 +70,17 @@ public abstract class AbstractService<T extends BaseModel> extends AbstractLogCo
     public T find(Long id) {
         logger.trace("Retrieving entity with id {}.", id.toString());
         return getRepository().findById(id).orElse(null);
+    }
+
+    @Override
+    public T findWithDetails(Long id) {
+        logger.trace("Retrieving details for entity with id {}.", id.toString());
+        return getRepository().findWithDetails(id);
+    }
+
+    @Override
+    public List<T> findAllWithDetails() {
+        logger.trace("Retrieving details for all entities");
+        return getRepository().findAllWithDetails();
     }
 }

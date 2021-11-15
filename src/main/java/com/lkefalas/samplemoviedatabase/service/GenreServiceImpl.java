@@ -1,14 +1,10 @@
 package com.lkefalas.samplemoviedatabase.service;
 
-import com.lkefalas.samplemoviedatabase.domain.Actor;
 import com.lkefalas.samplemoviedatabase.domain.Genre;
-import com.lkefalas.samplemoviedatabase.exception.NotFoundException;
+import com.lkefalas.samplemoviedatabase.repository.BaseRepository;
 import com.lkefalas.samplemoviedatabase.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,17 +17,7 @@ public class GenreServiceImpl extends AbstractService<Genre> implements GenreSer
     }
 
     @Override
-    public JpaRepository<Genre, Long> getRepository() {
+    public BaseRepository<Genre, Long> getRepository() {
         return repository;
-    }
-
-    @Override
-    public List<Genre> findAllWithDetails() {
-        return null;
-    }
-
-    @Override
-    public Genre findWithDetails(Long id) {
-        return repository.findWithDetails(id);
     }
 }

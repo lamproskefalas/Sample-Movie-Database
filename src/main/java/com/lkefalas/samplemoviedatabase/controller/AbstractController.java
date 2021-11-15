@@ -6,6 +6,7 @@ import com.lkefalas.samplemoviedatabase.base.AbstractLogComponent;
 import com.lkefalas.samplemoviedatabase.domain.BaseModel;
 import com.lkefalas.samplemoviedatabase.service.BaseService;
 import com.lkefalas.samplemoviedatabase.transfer.ApiResponse;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@RequiredArgsConstructor
 public abstract class AbstractController
         <T extends BaseModel,S extends BaseDTO,D extends BaseDTO, P extends BasePersistDTO>
         extends AbstractLogComponent
@@ -24,48 +26,42 @@ public abstract class AbstractController
     protected abstract BaseService<T,Long> getBaseService();
     protected final ModelMapper modelMapper;
 
-    protected AbstractController(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
-
     @GetMapping("/")
-    public ResponseEntity<ApiResponse<List<S>>> findAll() {
-        List<T> entities = getBaseService().findAll();
+    public ResponseEntity<ApiResponse<List<? extends BaseDTO>>> findAll(@RequestParam(defaultValue = "false") String fullDetails) {
 
-        List<S> simpleDTO =
-                (entities!=null)
-                        ?entities.stream().map(this::convertToSimpleDto).collect(Collectors.toList())
-                        :null;
+        List<? extends BaseDTO> responseDTO = null;
+        if (fullDetails.equals("false")) {
+            List<T> entities = getBaseService().findAll();
 
-        return ResponseEntity.ok(ApiResponse.<List<S>>builder().data(simpleDTO).build());
+            if (entities!=null) {
+                responseDTO = entities.stream().map(this::convertToSimpleDto).collect(Collectors.toList());
+            }
+        } else {
+            List<T> entities = getBaseService().findAllWithDetails();
+            
+            if (entities!=null) {
+                responseDTO = entities.stream().map(this::convertToDetailedDto).collect(Collectors.toList());
+            }
+        }
+        return ResponseEntity.ok(ApiResponse.<List<? extends BaseDTO>>builder().data(responseDTO).build());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<S>> find(@PathVariable("id") final Long id) {
-        T entity = getBaseService().find(id);
+    public ResponseEntity<ApiResponse<?>> find(
+            @PathVariable("id") final Long id,
+            @RequestParam(defaultValue = "false") String fullDetails
+    ) {
+        BaseDTO responseDTO;
+        if (fullDetails.equals("false")) {
+            T entity = getBaseService().find(id);
 
-        S simpleDTO = (entity!=null) ? convertToSimpleDto(entity) : null;
+            responseDTO = (entity != null) ? convertToSimpleDto(entity) : null;
+        } else {
+            T entity = getBaseService().findWithDetails(id);
+            responseDTO = (entity!=null) ? convertToDetailedDto(entity) : null;
+        }
 
-        return ResponseEntity.ok(ApiResponse.<S>builder().data(simpleDTO).build());
-    }
-
-    @GetMapping("/fullDetails")
-    public ResponseEntity<ApiResponse<List<D>>> findAllWithDetails(){
-        List<T> entities = getBaseService().findAllWithDetails();
-
-        List<D> detailedDTO =
-                (entities!=null)
-                ?entities.stream().map(this::convertToDetailedDto).collect(Collectors.toList())
-                :null;
-
-        return ResponseEntity.ok(ApiResponse.<List<D>>builder().data(detailedDTO).build());
-    }
-
-    @GetMapping("/{id}/fullDetails")
-    public ResponseEntity<ApiResponse<D>> findWithDetails(@PathVariable("id") final Long id) {
-        T entity = getBaseService().findWithDetails(id);
-        D detailedDTO = (entity!=null) ? convertToDetailedDto(entity) : null;
-        return ResponseEntity.ok(ApiResponse.<D>builder().data(detailedDTO).build());
+        return ResponseEntity.ok(ApiResponse.<BaseDTO>builder().data(responseDTO).build());
     }
 
     @PostMapping("")
