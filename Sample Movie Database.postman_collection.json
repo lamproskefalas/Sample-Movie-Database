@@ -231,7 +231,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/actors/fullDetails/",
+									"raw": "http://localhost:8080/actors/?fullDetails=true",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -239,8 +239,13 @@
 									"port": "8080",
 									"path": [
 										"actors",
-										"fullDetails",
 										""
+									],
+									"query": [
+										{
+											"key": "fullDetails",
+											"value": "true"
+										}
 									]
 								}
 							},
@@ -252,7 +257,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/actors/1/fullDetails/",
+									"raw": "http://localhost:8080/actors/1?fullDetails=true",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -260,9 +265,13 @@
 									"port": "8080",
 									"path": [
 										"actors",
-										"1",
-										"fullDetails",
-										""
+										"1"
+									],
+									"query": [
+										{
+											"key": "fullDetails",
+											"value": "true"
+										}
 									]
 								}
 							},
@@ -274,16 +283,21 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/actors/fullDetails/",
+									"raw": "http://localhost:8080/directors/?fullDetails=true",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "8080",
 									"path": [
-										"actors",
-										"fullDetails",
+										"directors",
 										""
+									],
+									"query": [
+										{
+											"key": "fullDetails",
+											"value": "true"
+										}
 									]
 								}
 							},
@@ -295,7 +309,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/directors/1/fullDetails/",
+									"raw": "http://localhost:8080/directors/1?fullDetails=true",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -303,9 +317,13 @@
 									"port": "8080",
 									"path": [
 										"directors",
-										"1",
-										"fullDetails",
-										""
+										"1"
+									],
+									"query": [
+										{
+											"key": "fullDetails",
+											"value": "true"
+										}
 									]
 								}
 							},
@@ -317,7 +335,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/shows/fullDetails/",
+									"raw": "http://localhost:8080/shows/?fullDetails=true",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -325,8 +343,13 @@
 									"port": "8080",
 									"path": [
 										"shows",
-										"fullDetails",
 										""
+									],
+									"query": [
+										{
+											"key": "fullDetails",
+											"value": "true"
+										}
 									]
 								}
 							},
@@ -338,7 +361,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/shows/1/fullDetails/",
+									"raw": "http://localhost:8080/shows/1?fullDetails=true",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -346,9 +369,13 @@
 									"port": "8080",
 									"path": [
 										"shows",
-										"1",
-										"fullDetails",
-										""
+										"1"
+									],
+									"query": [
+										{
+											"key": "fullDetails",
+											"value": "true"
+										}
 									]
 								}
 							},
