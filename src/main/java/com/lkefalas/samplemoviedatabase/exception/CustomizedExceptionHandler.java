@@ -43,7 +43,7 @@ public class CustomizedExceptionHandler extends AbstractLogComponent {
     public final ResponseEntity<ApiResponse<?>> handleConstraintViolationException(final ConstraintViolationException ex, final WebRequest request) {
         List<String> constraintViolations = ex.getConstraintViolations()
                                                 .stream()
-                                                .map(constraintViolation -> constraintViolation.getMessage())
+                                                .map(ConstraintViolation::getMessage)
                                                 .collect(Collectors.toList());
 
         return exceptionHandler(ex,HttpStatus.BAD_REQUEST,request,constraintViolations);
