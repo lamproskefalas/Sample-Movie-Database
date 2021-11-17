@@ -3,6 +3,8 @@ package com.lkefalas.samplemoviedatabase.transfer;
 import lombok.ToString;
 import lombok.Value;
 
+import java.util.List;
+
 /**
  * This class represents an error occurred while serving the corresponding request
  */
@@ -10,6 +12,6 @@ import lombok.Value;
 @ToString
 public class ApiError {
     Integer status;
-    String message;
+    List<String> messages;
     String path;
 }
