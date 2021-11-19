@@ -65,9 +65,12 @@ public abstract class AbstractController
     }
 
     @PostMapping("")
-    public ResponseEntity<ApiResponse<T>> createObject(@Valid @RequestBody final P persistDTO) {
+    public ResponseEntity<ApiResponse<?>> createObject(@Valid @RequestBody final P persistDTO) {
         T object = convertToEntity(persistDTO, "create");
-        return new ResponseEntity<>(ApiResponse.<T>builder().data(getBaseService().create(object)).build(), HttpStatus.CREATED);
+        object = getBaseService().create(object);
+
+        BaseDTO responseDTO = (object!=null) ? convertToDetailedDto(object) : null;
+        return new ResponseEntity<>(ApiResponse.<BaseDTO>builder().data(responseDTO).build(), HttpStatus.CREATED);
     }
 
     @PutMapping

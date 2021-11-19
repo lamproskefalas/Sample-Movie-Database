@@ -21,10 +21,12 @@ public class Role extends BaseModel {
     private String characterName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @NotNull(message = "A valid actor id must be provided")
     @JoinColumn(name = "actor_id")
     private Actor actor;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @NotNull(message = "A valid show id must be provided")
     @JoinColumn(name = "show_id")
     private Show show;
 }
