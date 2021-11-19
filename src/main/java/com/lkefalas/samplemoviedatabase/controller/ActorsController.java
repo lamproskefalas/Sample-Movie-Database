@@ -1,23 +1,20 @@
 package com.lkefalas.samplemoviedatabase.controller;
 
 import com.lkefalas.samplemoviedatabase.api.actors.ActorFullDetailsDTO;
-import com.lkefalas.samplemoviedatabase.api.actors.ActorsPersistDTO;
-import com.lkefalas.samplemoviedatabase.api.actors.ActorsSimpleDTO;
+import com.lkefalas.samplemoviedatabase.api.actors.ActorPersistDTO;
+import com.lkefalas.samplemoviedatabase.api.actors.ActorSimpleDTO;
 import com.lkefalas.samplemoviedatabase.domain.Actor;
 import com.lkefalas.samplemoviedatabase.service.ActorService;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.text.ParseException;
 
 @RestController()
 @RequestMapping("/actors")
 @Getter
 public class ActorsController extends AbstractController
-        <Actor, ActorsSimpleDTO, ActorFullDetailsDTO, ActorsPersistDTO> {
+        <Actor, ActorSimpleDTO, ActorFullDetailsDTO, ActorPersistDTO> {
     private final ActorService baseService;
 
     protected ActorsController(ModelMapper modelMapper, ActorService baseService) {
@@ -26,13 +23,13 @@ public class ActorsController extends AbstractController
     }
 
     @Override
-    public Actor convertToEntity(ActorsPersistDTO actorsPersistDTO, String mode) {
+    public Actor convertToEntity(ActorPersistDTO actorPersistDTO, String mode) {
         // We do not want to set the id when creating this even if provided
         if(mode.equals("create")) {
-            actorsPersistDTO.setId(null);
+            actorPersistDTO.setId(null);
         }
 
-        return modelMapper.map(actorsPersistDTO, Actor.class);
+        return modelMapper.map(actorPersistDTO, Actor.class);
     }
 
     @Override
@@ -41,7 +38,7 @@ public class ActorsController extends AbstractController
     }
 
     @Override
-    ActorsSimpleDTO convertToSimpleDto(Actor model) {
-        return modelMapper.map(model, ActorsSimpleDTO.class);
+    ActorSimpleDTO convertToSimpleDto(Actor model) {
+        return modelMapper.map(model, ActorSimpleDTO.class);
     }
 }

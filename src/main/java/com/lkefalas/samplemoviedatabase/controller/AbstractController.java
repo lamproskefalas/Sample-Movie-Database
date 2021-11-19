@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Controller
@@ -77,6 +78,10 @@ public abstract class AbstractController
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody final P persistDTO) {
         T object = convertToEntity(persistDTO, "update");
+
+        if(!getBaseService().exists(object))
+            throw new NoSuchElementException();
+
         getBaseService().update(object);
     }
 

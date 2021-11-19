@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ActorsSimpleDTO extends BaseDTO {
+public class ActorSimpleDTO extends BaseDTO {
     private String firstName;
 
     private String lastName;

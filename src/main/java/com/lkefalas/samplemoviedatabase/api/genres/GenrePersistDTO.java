@@ -1,4 +1,4 @@
-package com.lkefalas.samplemoviedatabase.api.actors;
+package com.lkefalas.samplemoviedatabase.api.genres;
 
 import com.lkefalas.samplemoviedatabase.api.BasePersistDTO;
 import lombok.Getter;
@@ -8,8 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ActorsPersistDTO extends BasePersistDTO {
-    private String firstName;
-
-    private String lastName;
+public class GenrePersistDTO extends BasePersistDTO {
+    private String name;
 }

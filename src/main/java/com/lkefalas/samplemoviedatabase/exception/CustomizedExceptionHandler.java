@@ -3,6 +3,7 @@ package com.lkefalas.samplemoviedatabase.exception;
 import com.lkefalas.samplemoviedatabase.base.AbstractLogComponent;
 import com.lkefalas.samplemoviedatabase.transfer.ApiError;
 import com.lkefalas.samplemoviedatabase.transfer.ApiResponse;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
@@ -41,6 +42,12 @@ public class CustomizedExceptionHandler extends AbstractLogComponent {
     public final ResponseEntity<ApiResponse<?>> handleConstraintViolationException(final ConstraintViolationException  ex, final WebRequest request) {
         String msg = "Validation error";
         return exceptionHandler(ex,HttpStatus.BAD_REQUEST,request,msg, ex.getConstraintViolations());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public final ResponseEntity<ApiResponse<?>> handleDataIntegrityViolationException(final DataIntegrityViolationException  ex, final WebRequest request) {
+        String msg = "Hibernate Validation error";
+        return exceptionHandler(ex,HttpStatus.BAD_REQUEST,request,msg);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
