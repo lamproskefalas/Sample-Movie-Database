@@ -85,6 +85,21 @@ public abstract class AbstractController
         getBaseService().update(object);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") final Long id) {
+        if (getBaseService().find(id) != null)
+            getBaseService().deleteById(id);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@Valid @RequestBody final T entity) {
+        if (getBaseService().exists(entity)) {
+            getBaseService().delete(entity);
+        }
+    }
+
     abstract T convertToEntity(P persistDTO, String mode);
     abstract D convertToDetailedDto(T model);
     abstract S convertToSimpleDto(T model);
